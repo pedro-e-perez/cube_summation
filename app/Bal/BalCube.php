@@ -45,7 +45,9 @@ class BalCube {
 
         $resultado = "";
         $exQuerytrim = trim($query);
-        $tipo = $this->tipoQuery(strlen($exQuerytrim), $exQuerytrim);
+        $ltsquery = explode(" ", $query);
+
+        $tipo = $this->tipoQuery(count($ltsquery), $exQuerytrim);
         $resultadoT = "Ejecutado " . $this->ExecuteQuery($tipo, $exQuerytrim);
         $resultado = $resultado . "<br>" . $resultadoT;
 
@@ -76,14 +78,36 @@ class BalCube {
         } else if ($tipo == "QUERY") {
             return "QUERY";
         } else if ($tipo == "T") {
-             $this->request->session()->put('numT', $query);
-            return "T se haran ".$this->request->session()->get('numT')." consultas.";
+            $this->request->session()->put('numT', $query);
+            return "T se haran " . $this->request->session()->get('numT') . " pruebas.";
         } else if ($tipo == "N-M") {
-             $data->GuadarMatriz($query);
-            return "N-M";
+            return "N-M ".$this->Evalua_N_M($query);
         } else {
             return null;
-        };
+        }
+    }
+
+    function Evalua_N_M($query) {
+        $ltsquery = explode(" ", $query);
+        $contador = 0;
+        $result = "";
+        $data = new \App\Dal\CubeData($this->request);
+
+        foreach ($ltsquery as &$exQuery) {
+            if (is_numeric($exQuery)) {
+                if ($contador == 0) {
+                    $data->GuadarMatriz($exQuery);
+                    $result = $result . " se creo una matriz de " . $exQuery . " * " . $exQuery . " * " . $exQuery;
+                } else {
+                    $this->request->session()->put('numM', $exQuery);
+                    $result = $result . " se pueden hacer " . $exQuery . " consultas ";
+                }
+                $contador++;
+            } else {
+                $result= "Han ocurrido errores";
+            }
+        }
+        return $result;
     }
 
 }
