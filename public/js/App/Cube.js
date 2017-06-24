@@ -32,11 +32,11 @@ var page = {
             },
             success: function (data) {
 
-                alert(data.Estado);
+                alert(data.historia);
             }
             , error: function (jqXHR, textStatus, errorThrown)
             {
-                alert(jqXHR);
+                alert("Error");
             }
         });
 

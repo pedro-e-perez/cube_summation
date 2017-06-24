@@ -13,8 +13,8 @@ class CubeController extends Controller
     }
     public function ValidateQuery(Request $request)
     {
-        $datos = new \BalCube();
-        return response()->json(["Estado"=>$datos->EjecutarQuery($request)]);
+        $datos = new \App\Bal\BalCube($request);
+        return response()->json(["Resultado"=>$datos->EjecutarQuery($request)]);
         
     }
 }
