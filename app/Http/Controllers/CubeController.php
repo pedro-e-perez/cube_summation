@@ -11,4 +11,10 @@ class CubeController extends Controller
     {
         return view('cube.index');
     }
+    public function ValidateQuery(Request $request)
+    {
+        $datos = new \BalCube();
+        return response()->json(["Estado"=>$datos->EjecutarQuery($request)]);
+        
+    }
 }

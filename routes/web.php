@@ -13,3 +13,4 @@
 
 
 Route::get('/', 'CubeController@Index');
+Route::post('ValidateQuery', 'CubeController@ValidateQuery');

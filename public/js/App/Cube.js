@@ -5,15 +5,41 @@
  */
 
 
-var page={
-    init:function()
+var page = {
+    init: function ()
     {
-       $("#btnEjecutar").Click(page.ejecutar);
-        
+        $("#btnEjecutar").click(page.ejecutar);
+        $('#txtQuey').focus();
+        $('#txtQuey').on('keypress', function (e) {
+            if (e.which === 13) {
+
+                //Disable textbox to prevent multiple submit
+                page.ejecutar();
+            }
+        });
+
     }
-    , ejecutar:function()
+    , ejecutar: function ()
     {
-        alert("");
-        
+        $.ajax({
+            url: "/ValidateQuery",
+            type: "POST",
+            dataType: "json",
+            data: {
+                queryText: $('#txtQuey').val()
+                ,_token: $('input[name=_token]').val()
+
+            },
+            success: function (data) {
+
+                alert(data.Estado);
+            }
+            , error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert(jqXHR);
+            }
+        });
+
+
     }
 };
