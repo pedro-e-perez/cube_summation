@@ -24,7 +24,9 @@ class QueryData {
     //put your code here
     public function GuardarQuery($query) {
         $saveQuery = $this->request->session()->get('recordingQuery');
-        $query += "\n" + $saveQuery;
+        $saveQuery=$saveQuery."<br>" . $query;
+        $this->request->session()->put('recordingQuery', $saveQuery);
+
         return $saveQuery;
     }
 

@@ -16,7 +16,7 @@
     <div class="panel-heading"><i class="fa fa-bar-chart" aria-hidden="true"></i> Resumen </div>
     <div class="panel-body">
         <div class="resumen">
-            <div class="contresumen"></div>
+            <div class="contresumen" id="contresumen"></div>
             
         </div>
     </div>

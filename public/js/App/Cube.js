@@ -27,16 +27,17 @@ var page = {
             dataType: "json",
             data: {
                 queryText: $('#txtQuey').val()
-                ,_token: $('input[name=_token]').val()
+                , _token: $('input[name=_token]').val()
 
             },
             success: function (data) {
-
-                alert(data.historia);
+                $('#contresumen').empty();
+                $('#contresumen').append(data.Resultado.historia);
+                $('#txtQuey').val("");
             }
             , error: function (jqXHR, textStatus, errorThrown)
             {
-                alert("Error");
+                alert("Error, Intente nuevamente");
             }
         });
 
