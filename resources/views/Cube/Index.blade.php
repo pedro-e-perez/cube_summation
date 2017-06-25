@@ -11,18 +11,22 @@
 @section('content')
 
 <h1>www.hackerrank.com</h1>
- <input type="hidden" name="_token" value="{{ csrf_token() }}">
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="panel panel-default">
     <div class="panel-heading"><i class="fa fa-bar-chart" aria-hidden="true"></i> Resumen </div>
     <div class="panel-body">
         <div class="resumen">
             <div class="contresumen" id="contresumen"></div>
-            
+
         </div>
     </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><i class="fa fa-terminal" aria-hidden="true"></i> Queryes </div>
+    <div class="panel-heading"><i class="fa fa-terminal" aria-hidden="true"></i> Queryes 
+        <div class="pull-right" id="lblProcesando" style="display: none">
+           Procesando <i class="fa fa-spinner fa-spin"></i>
+        </div>
+    </div>
     <div class="panel-body">
         <div class="row">
             <div class="col-lg-10">       
@@ -46,7 +50,7 @@
 <script src="../../../js/App/Cube.js" type="text/javascript"></script>
 
 <script>
-    $(document).ready(page.init());
+$(document).ready(page.init());
 
 </script>
 @endsection

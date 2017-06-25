@@ -89,13 +89,13 @@ class BalCube {
     function ExecuteQuery($tipo, $query) {
         $data = new \App\Dal\CubeData($this->request);
         if ($tipo == "UPDATE") {
-            return "UPDATE" . $this->Update($query);
+            return "UPDATE <span class=\"label label-primary\"> Resultado </span>" . $this->Update($query);
         } else if ($tipo == "QUERY") {
             return "QUERY" . $this->Select($query);
         } else if ($tipo == "T") {
             $this->request->session()->put('numT', $query);
             if ((int) $query <= 50) {
-                return "T se haran " . $this->request->session()->get('numT') . " pruebas.";
+                return "<br><span class=\"label label-primary\"> Resultado </span>T se haran  " . $this->request->session()->get('numT') . " pruebas.";
             } else {
 
                 $this->SetError("T >50");
@@ -122,7 +122,7 @@ class BalCube {
                     if ((int) $exQuery <= 100) {
                         $data->GuadarMatriz($exQuery);
                         $this->request->session()->put('numN', $exQuery);
-                        $result = $result . " se creo una matriz de " . $exQuery . " * " . $exQuery . " * " . $exQuery;
+                        $result = $result . "<br> <span class=\"label label-primary\"> Resultado </span> se creo una matriz de " . $exQuery . " * " . $exQuery . " * " . $exQuery;
                     } else {
 
                         $this->SetError("N >50");
@@ -131,7 +131,7 @@ class BalCube {
                 } else {
                     if ((int) $exQuery <= 1000) {
                         $this->request->session()->put('numM', $exQuery);
-                        $result = $result . " se pueden hacer " . $exQuery . " consultas ";
+                        $result = $result . "<br><span class=\"label label-primary\"> Resultado </span>  se pueden hacer " . $exQuery . " consultas ";
                     } else {
 
                         $this->SetError("M >50");
@@ -159,7 +159,7 @@ class BalCube {
         $z = $ltsquery[2];
         $valor = $ltsquery[3];
         $data->updateMatrix($x, $y, $z, $valor);
-        $result = " Se actualizo el campo x=" . $x . " y=" . $y . " z=" . $z . " Valor=" . $data->GetValue($x, $y, $z);
+        $result = "<br> <span class=\"label label-primary\"> Resultado </span> Se actualizo el campo x=" . $x . " y=" . $y . " z=" . $z . " Valor=" . $data->GetValue($x, $y, $z);
         return $result;
     }
 
@@ -198,8 +198,7 @@ class BalCube {
         }
 
         if (($x <= $x2 && $x2 <= $nValue) && ($y <= $y2 && $y2 <= $nValue) && ($z <= $z2 && $z2 <= $nValue)) {
-            $this->request->session()->put('numM', $exQuery);
-            $result = $result . " se pueden hacer " . $exQuery . " consultas ";
+            $result = "<br> <span class=\"label label-primary\"> Resultado </span>  La consulta arroja el siguiente valor:" . $data->Select($x, $y, $z, $x2, $y2, $z2);
         } else {
 
             $this->SetError("1 <= x1 <= x2 <= N 
@@ -209,7 +208,7 @@ class BalCube {
         }
 
 
-        $result = " La consulta arroja el siguiente valor:" . $data->Select($x, $y, $z, $x2, $y2, $z2);
+       
         return $result;
     }
 

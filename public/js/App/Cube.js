@@ -19,8 +19,21 @@ var page = {
         });
 
     }
+    ,procesando:function(estado)
+    {
+        if(estado)
+        {
+            $("#lblProcesando").fadeIn();
+            
+        }
+        else{
+            $("#lblProcesando").fadeOut()();
+        }
+        
+    }
     , ejecutar: function ()
     {
+        page.procesando(true);
         $.ajax({
             url: "/ValidateQuery",
             type: "POST",
@@ -39,6 +52,7 @@ var page = {
                     $('#contresumen').append(data.Resultado.historia);
                 }
                 $('#txtQuey').val("");
+                page.procesando(false);
             }
             , error: function (jqXHR, textStatus, errorThrown)
             {

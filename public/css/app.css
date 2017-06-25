@@ -26,3 +26,15 @@
      padding-top: 10px;
     
 }
+@-webkit-keyframes spinner-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@-moz-keyframes spinner-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@-o-keyframes spinner-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@-ms-keyframes spinner-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes spinner-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+ 
+.fa-spinner.fa-spin {
+  -webkit-animation: spinner-spin  1s steps(8) infinite;
+  -moz-animation: spinner-spin  1s steps(8) infinite;
+  -o-animation: spinner-spin  1s steps(8) infinite;
+  animation: spinner-spin  1s steps(8) infinite;
+}
