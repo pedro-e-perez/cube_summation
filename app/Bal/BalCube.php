@@ -119,11 +119,24 @@ class BalCube {
         foreach ($ltsquery as &$exQuery) {
             if (is_numeric($exQuery)) {
                 if ($contador == 0) {
-                    $data->GuadarMatriz($exQuery);
-                    $result = $result . " se creo una matriz de " . $exQuery . " * " . $exQuery . " * " . $exQuery;
+                    if ((int) $exQuery <= 100) {
+                        $data->GuadarMatriz($exQuery);
+                        $this->request->session()->put('numN', $exQuery);
+                        $result = $result . " se creo una matriz de " . $exQuery . " * " . $exQuery . " * " . $exQuery;
+                    } else {
+
+                        $this->SetError("N >50");
+                        $this->IsError = true;
+                    }
                 } else {
-                    $this->request->session()->put('numM', $exQuery);
-                    $result = $result . " se pueden hacer " . $exQuery . " consultas ";
+                    if ((int) $exQuery <= 1000) {
+                        $this->request->session()->put('numM', $exQuery);
+                        $result = $result . " se pueden hacer " . $exQuery . " consultas ";
+                    } else {
+
+                        $this->SetError("M >50");
+                        $this->IsError = true;
+                    }
                 }
                 $contador++;
             } else {
@@ -153,6 +166,7 @@ class BalCube {
     function Select($query) {
         $query = trim(str_replace("QUERY", "", $query));
         $ltsquery = explode(" ", $query);
+        $nValue =(int) $this->request->session()->get('numN');
         $contador = 1;
         $result = "";
         $data = new \App\Dal\CubeData($this->request);
@@ -183,6 +197,16 @@ class BalCube {
             }
         }
 
+        if (($x <= $x2 && $x2 <= $nValue) && ($y <= $y2 && $y2 <= $nValue) && ($z <= $z2 && $z2 <= $nValue)) {
+            $this->request->session()->put('numM', $exQuery);
+            $result = $result . " se pueden hacer " . $exQuery . " consultas ";
+        } else {
+
+            $this->SetError("1 <= x1 <= x2 <= N 
+1 <= y1 <= y2 <= N 
+1 <= z1 <= z2 <= N ".$nValue);
+            $this->IsError = true;
+        }
 
 
         $result = " La consulta arroja el siguiente valor:" . $data->Select($x, $y, $z, $x2, $y2, $z2);
