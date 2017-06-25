@@ -3,15 +3,6 @@
             
             
             
-            <div class="content-text challenge-text mlB">
-                <div class="challenge_problem_statement"><div class="msB challenge_problem_statement_body"><div class="hackdown-content"><style id="MathJax_SVG_styles">.MathJax_SVG_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
-.MathJax_SVG .MJX-monospace {font-family: monospace}
-.MathJax_SVG .MJX-sans-serif {font-family: sans-serif}
-.MathJax_SVG {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
-.MathJax_SVG * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
-.mjx-svg-href {fill: blue; stroke: blue}
-</style><svg style="display: none;"><defs id="MathJax_SVG_glyphs"></defs></svg><p><a href="https://www.hackerrank.com/external_redirect?to=https://hr-testcases.s3.amazonaws.com/1058/1058-chinese.md" target="_blank">Chinese Version</a><br>
-<a href="https://www.hackerrank.com/external_redirect?to=https://hr-testcases.s3.amazonaws.com/1058/1058_rus.md" target="_blank">Russian Version</a><br></p>
 
 <p>You are given a 3-D Matrix in which each block contains 0 initially. The first block is defined by the coordinate (1,1,1) and the last block is defined by the coordinate (N,N,N). There are two types of queries.</p>
 
