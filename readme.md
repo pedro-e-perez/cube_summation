@@ -1,51 +1,89 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+<div class="span-sm-11 hr_tour-problem-statement problem-statement">
+            
+            
+            
+            
+            <div class="content-text challenge-text mlB">
+                <div class="challenge_problem_statement"><div class="msB challenge_problem_statement_body"><div class="hackdown-content"><style id="MathJax_SVG_styles">.MathJax_SVG_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax_SVG .MJX-monospace {font-family: monospace}
+.MathJax_SVG .MJX-sans-serif {font-family: sans-serif}
+.MathJax_SVG {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax_SVG * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.mjx-svg-href {fill: blue; stroke: blue}
+</style><svg style="display: none;"><defs id="MathJax_SVG_glyphs"></defs></svg><p><a href="https://www.hackerrank.com/external_redirect?to=https://hr-testcases.s3.amazonaws.com/1058/1058-chinese.md" target="_blank">Chinese Version</a><br>
+<a href="https://www.hackerrank.com/external_redirect?to=https://hr-testcases.s3.amazonaws.com/1058/1058_rus.md" target="_blank">Russian Version</a><br></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+<p>You are given a 3-D Matrix in which each block contains 0 initially. The first block is defined by the coordinate (1,1,1) and the last block is defined by the coordinate (N,N,N). There are two types of queries.</p>
 
-## About Laravel
+<pre><code>UPDATE x y z W
+</code></pre>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+<p>updates the value of block (x,y,z) to W.</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<pre><code>QUERY x1 y1 z1 x2 y2 z2
+</code></pre>
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+<p>calculates the sum of the value of blocks whose x coordinate is between x1 and x2 (inclusive), y coordinate between y1 and y2 (inclusive) and z coordinate between z1 and z2 (inclusive). </p>
 
-## Learning Laravel
+<p><strong>Input Format</strong> <br>
+The first line contains an integer T, the number of test-cases. T testcases follow. <br>
+For each test case, the first line will contain two integers N and M separated by a single space. <br>
+N defines the N * N * N matrix. <br>
+M defines the number of operations. <br>
+The next M lines will contain either  </p>
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+<pre><code> 1. UPDATE x y z W
+ 2. QUERY  x1 y1 z1 x2 y2 z2 
+</code></pre>
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+<p><strong>Output Format</strong> <br>
+Print the result for each QUERY.</p>
 
-## Laravel Sponsors
+<p><strong>Constrains</strong> <br>
+1 &lt;= T &lt;= 50 <br>
+1 &lt;= N &lt;= 100 <br>
+1 &lt;= M &lt;= 1000 <br>
+1 &lt;= x1 &lt;= x2 &lt;= N <br>
+1 &lt;= y1 &lt;= y2 &lt;= N <br>
+1 &lt;= z1 &lt;= z2 &lt;= N <br>
+1 &lt;= x,y,z &lt;= N <br>
+-10<sup>9</sup> &lt;= W &lt;= 10<sup>9</sup>  </p>
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](http://patreon.com/taylorotwell):
+<p><strong>Sample Input</strong></p>
 
-- **[Vehikl](http://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Styde](https://styde.net)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
+<pre><code>2
+4 5
+UPDATE 2 2 2 4
+QUERY 1 1 1 3 3 3
+UPDATE 1 1 1 23
+QUERY 2 2 2 4 4 4
+QUERY 1 1 1 3 3 3
+2 4
+UPDATE 2 2 2 1
+QUERY 1 1 1 1 1 1
+QUERY 1 1 1 2 2 2
+QUERY 2 2 2 2 2 2
+</code></pre>
 
-## Contributing
+<p><strong>Sample Output</strong></p>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+<pre><code>4
+4
+27
+0
+1
+1
+</code></pre>
 
-## Security Vulnerabilities
+<p><strong>Explanation</strong> <br>
+First test case, we are given a cube of 4 * 4 * 4 and 5 queries.  Initially all the cells (1,1,1) to (4,4,4) are 0. <br>
+<code>UPDATE 2 2 2 4</code> makes the cell (2,2,2) = 4 <br>
+<code>QUERY 1 1 1 3 3 3</code>. As (2,2,2) is updated to 4 and the rest are all 0. The answer to this query is 4. <br>
+<code>UPDATE 1 1 1 23</code>. updates the cell (1,1,1) to 23. 
+<code>QUERY 2 2 2 4 4 4</code>. Only the cell (1,1,1) and (2,2,2) are non-zero and (1,1,1) is not between (2,2,2) and (4,4,4). So, the answer is 4. <br>
+<code>QUERY 1 1 1 3 3 3</code>. 2 cells are non-zero and their sum is 23+4 = 27. </p></div></div></div>
+            </div>
+            
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+            
+        </div>
