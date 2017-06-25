@@ -17,9 +17,24 @@ namespace App\Bal;
 class BalCube {
 
     private $request;
+    private $IsError;
+    private $MsgError;
 
     function __construct($request) {
         $this->request = $request;
+        $this->IsError = false;
+    }
+
+    public function IsError() {
+        return $this->IsError;
+    }
+
+    public function Error() {
+        return $this->MsgError;
+    }
+
+    public function SetError($ErrorNew) {
+        $this->MsgError = $this->MsgError . "<br> " . $ErrorNew;
     }
 
     //put your code here
@@ -34,7 +49,7 @@ class BalCube {
 
         $data = new \App\Dal\CubeData($this->request);
 
-        return ["matriz" => $data->GetMatriz($this->request), "historia" => $queryData->GetHistoria()];
+        return ["matriz" => $data->GetMatriz($this->request), "historia" => $queryData->GetHistoria(), "IsError" => $this->IsError(), "MsgError" => $this->Error()];
     }
 
     function Existe() {
@@ -55,15 +70,15 @@ class BalCube {
     }
 
     function tipoQuery($size, $query) {
-        if ($size == 1) {
+        if ($size == 1 && strpos($query, "UPDATE") === false && strpos($query, "QUERY") === false) {
             return "T";
-        } else if ($size == 2) {
+        } else if ($size == 2 && strpos($query, "UPDATE") === false && strpos($query, "QUERY") === false) {
             return "N-M";
         } else {
 
-            if (strpos($query, "UPDATE")) {
+            if (strpos($query, "UPDATE") >= 0 && strpos($query, "QUERY") === false) {
                 return "UPDATE";
-            } else if (strpos($query, "QUERY")) {
+            } else if (strpos($query, "QUERY") >= 0 && strpos($query, "UPDATE") === false) {
                 return "QUERY";
             } else {
                 return null;
@@ -74,15 +89,23 @@ class BalCube {
     function ExecuteQuery($tipo, $query) {
         $data = new \App\Dal\CubeData($this->request);
         if ($tipo == "UPDATE") {
-            return "UPDATE";
+            return "UPDATE" . $this->Update($query);
         } else if ($tipo == "QUERY") {
-            return "QUERY";
+            return "QUERY" . $this->Select($query);
         } else if ($tipo == "T") {
             $this->request->session()->put('numT', $query);
-            return "T se haran " . $this->request->session()->get('numT') . " pruebas.";
+            if ((int) $query <= 50) {
+                return "T se haran " . $this->request->session()->get('numT') . " pruebas.";
+            } else {
+
+                $this->SetError("T >50");
+                $this->IsError = true;
+            }
         } else if ($tipo == "N-M") {
-            return "N-M ".$this->Evalua_N_M($query);
+            return "N-M " . $this->Evalua_N_M($query);
         } else {
+            $this->SetError("No se pudo ejecutar el Query");
+            $this->IsError = true;
             return null;
         }
     }
@@ -104,9 +127,65 @@ class BalCube {
                 }
                 $contador++;
             } else {
-                $result= "Han ocurrido errores";
+                $this->SetError("No se pudo ejecutar el Query");
+                $this->IsError = true;
+                $result = "Han ocurrido errores";
             }
         }
+        return $result;
+    }
+
+    function Update($query) {
+        $query = trim(str_replace("UPDATE", "", $query));
+        $ltsquery = explode(" ", $query);
+        $contador = 0;
+        $result = "";
+        $data = new \App\Dal\CubeData($this->request);
+        $x = $ltsquery[0];
+        $y = $ltsquery[1];
+        $z = $ltsquery[2];
+        $valor = $ltsquery[3];
+        $data->updateMatrix($x, $y, $z, $valor);
+        $result = " Se actualizo el campo x=" . $x . " y=" . $y . " z=" . $z . " Valor=" . $data->GetValue($x, $y, $z);
+        return $result;
+    }
+
+    function Select($query) {
+        $query = trim(str_replace("QUERY", "", $query));
+        $ltsquery = explode(" ", $query);
+        $contador = 1;
+        $result = "";
+        $data = new \App\Dal\CubeData($this->request);
+        $x = 0;
+        $y = 0;
+        $z = 0;
+        $x2 = 0;
+        $y2 = 0;
+        $z2 = 0;
+        foreach ($ltsquery as &$exQuery) {
+            if (is_numeric($exQuery)) {
+                $value = (int) $exQuery;
+                if ($contador == 1) {
+                    $x = $value;
+                } else if ($contador == 2) {
+                    $y = $value;
+                } else if ($contador == 3) {
+                    $z = $value;
+                } else if ($contador == 4) {
+                    $x2 = $value;
+                } else if ($contador == 5) {
+                    $y2 = $value;
+                } else if ($contador == 6) {
+                    $z2 = $value;
+                }
+
+                $contador ++;
+            }
+        }
+
+
+
+        $result = " La consulta arroja el siguiente valor:" . $data->Select($x, $y, $z, $x2, $y2, $z2);
         return $result;
     }
 

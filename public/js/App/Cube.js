@@ -32,7 +32,12 @@ var page = {
             },
             success: function (data) {
                 $('#contresumen').empty();
-                $('#contresumen').append(data.Resultado.historia);
+                if (data.Resultado.IsError)
+                {
+                     alert("Error, Intente nuevamente "+data.Resultado.MsgError);
+                } else {
+                    $('#contresumen').append(data.Resultado.historia);
+                }
                 $('#txtQuey').val("");
             }
             , error: function (jqXHR, textStatus, errorThrown)
