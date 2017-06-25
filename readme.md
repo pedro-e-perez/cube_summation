@@ -1,4 +1,4 @@
-<div class="span-sm-11 hr_tour-problem-statement problem-statement">
+
    <h2 class="hr_tour-challenge-name pull-left mlT">
                 Cube Summation
                 
@@ -77,8 +77,8 @@ First test case, we are given a cube of 4 * 4 * 4 and 5 queries.  Initially all 
 <code>UPDATE 1 1 1 23</code>. updates the cell (1,1,1) to 23. 
 <code>QUERY 2 2 2 4 4 4</code>. Only the cell (1,1,1) and (2,2,2) are non-zero and (1,1,1) is not between (2,2,2) and (4,4,4). So, the answer is 4. <br>
 <code>QUERY 1 1 1 3 3 3</code>. 2 cells are non-zero and their sum is 23+4 = 27. </p></div></div></div>
-            </div>
+     
             
 
             
-        </div>
+    
